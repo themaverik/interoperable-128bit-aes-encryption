@@ -58,9 +58,9 @@ Encryption using Java
       algorithmParams.init(new IvParameterSpec(iv));
       cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, algorithmParams);
       return new String(cipher.doFinal(DatatypeConverter.parseBase64Binary(ciphertext)), "UTF-8");
-		} catch (NoSuchPaddingException | BadPaddingException e) {
+    } catch (NoSuchPaddingException | BadPaddingException e) {
       System.out.println("Padding exception in decrypt(): " + e);
-		} catch ( NoSuchAlgorithmException | InvalidKeyException | IllegalBlockSizeException e ) {
+    } catch ( NoSuchAlgorithmException | InvalidKeyException | IllegalBlockSizeException e ) {
       System.out.println("Decryption exception in decrypt(): " + e);
     } catch (Exception e) {
       System.out.println("Exception in decrypt(): " + e);
@@ -128,8 +128,8 @@ function encrypt($plaintext, $passphrase, $iv) {
 // Decrypt using AES CBC (128-bits)
 function decrypt($ciphertext, $passphrase, $iv) {
   try {
-		$decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $passphrase, $ciphertext, MCRYPT_MODE_CBC, $iv);
-		return unpad_pkcs5($decrypted);
+    $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $passphrase, $ciphertext, MCRYPT_MODE_CBC, $iv);
+    return unpad_pkcs5($decrypted);
   } catch (Exception $e) {
     echo "Encryption exception in decrypt: " . $e->getMessage() . "\n";
   }
