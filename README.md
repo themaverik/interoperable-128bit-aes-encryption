@@ -71,7 +71,7 @@ Encryption using Java
   
 Encryption using Node.js. Requires [crypto-js](https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js).
   
-  ```
+  ```javascript
 // Encryption using AES CBC (128-bits)
 function encrypt(plaintext, passphrase, iv) {
   try {
@@ -113,7 +113,7 @@ function decrypt(ciphertext, passphrase, iv) {
 
 Encryption using PHP
 
-```
+```php
 // Encryption using AES CBC (128-bits)
 function encrypt($plaintext, $passphrase, $iv) {
   try {
@@ -138,7 +138,7 @@ function decrypt($ciphertext, $passphrase, $iv) {
 
 Encryption using Python
 
-```
+```python
 # Encryption using AES CBC (128-bits)
 def encrypt(plaintext, passphrase, iv):
   try:
