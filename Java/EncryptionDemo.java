@@ -27,7 +27,7 @@ public class EncryptionDemo {
       String passphrase = (ENCRYPTION_KEY.length() > KEY_SIZE) ? ENCRYPTION_KEY.substring(0, KEY_SIZE) : ENCRYPTION_KEY;
       byte[] key = passphrase.getBytes("UTF-8");
 
-			// Generate initialization vector 
+      // Generate initialization vector 
       byte[] iv = generateInitializationVector(KEY_SIZE);
       System.out.println("IV: " + new String(iv, "UTF-8"));
       
@@ -57,16 +57,16 @@ public class EncryptionDemo {
       SecretKeySpec secretKeySpec;
       secretKeySpec = new SecretKeySpec(key, "AES");
       
-	  // PKCS#5 Padding
+      // PKCS#5 Padding
       Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
       AlgorithmParameters algorithmParams = AlgorithmParameters.getInstance("AES");
       algorithmParams.init(new IvParameterSpec(iv));
       cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, algorithmParams);
       byte[] encryptedBytes = cipher.doFinal(plaintext);
       return DatatypeConverter.printBase64Binary(encryptedBytes);
-		} catch (NoSuchPaddingException | BadPaddingException e) {
+    } catch (NoSuchPaddingException | BadPaddingException e) {
       System.out.println("Padding exception in encrypt(): " + e);
-		} catch ( NoSuchAlgorithmException | InvalidKeyException	| IllegalBlockSizeException e ) {
+    } catch ( NoSuchAlgorithmException | InvalidKeyException	| IllegalBlockSizeException e ) {
       System.out.println("Validation exception in encrypt(): " + e);
     } catch (Exception e) {
       System.out.println("Exception in encrypt(): " + e);
@@ -92,9 +92,9 @@ public class EncryptionDemo {
       algorithmParams.init(new IvParameterSpec(iv));
       cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, algorithmParams);
       return new String(cipher.doFinal(DatatypeConverter.parseBase64Binary(ciphertext)), "UTF-8");
-		} catch (NoSuchPaddingException | BadPaddingException e) {
+    } catch (NoSuchPaddingException | BadPaddingException e) {
       System.out.println("Padding exception in decrypt(): " + e);
-		} catch ( NoSuchAlgorithmException | InvalidKeyException	| IllegalBlockSizeException e ) {
+    } catch ( NoSuchAlgorithmException | InvalidKeyException	| IllegalBlockSizeException e ) {
       System.out.println("Validation exception in decrypt(): " + e);
     } catch (Exception e) {
       System.out.println("Exception in decrypt(): " + e);
@@ -109,7 +109,7 @@ public class EncryptionDemo {
    * @return bytes
    */
   private static byte[] generateInitializationVector(int len) {
-		try {
+    try {
       char[] CHAR_ARRAY = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456879".toCharArray();
       SecureRandom srand = new SecureRandom();
       Random rand = new Random();
@@ -121,9 +121,9 @@ public class EncryptionDemo {
         sb.append(Integer.toHexString(rand.nextInt(CHAR_ARRAY.length)));
       }
       return sb.toString().substring(0, KEY_SIZE).getBytes("UTF-8");
-		} catch (Exception e) {
-		  System.out.println("Error generating Initialization Vector: " + e);
-		}
-		return null; 
+    } catch (Exception e) {
+      System.out.println("Error generating Initialization Vector: " + e);
+    }
+    return null; 
   }
 }
