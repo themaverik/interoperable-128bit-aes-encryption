@@ -15,11 +15,11 @@ function pad_pkcs5($text) {
 
 function unpad_pkcs5($text) {
   try {
-		$pad_chr = substr($text, -1);
-		$pad = ord($pad_chr);
+    $pad_chr = substr($text, -1);
+    $pad = ord($pad_chr);
 
-		// Check padding
-		if (strspn($text, $pad_chr, strlen($text) - $pad) != $pad) 
+	// Check padding
+    if (strspn($text, $pad_chr, strlen($text) - $pad) != $pad) 
       throw new Exception('Invalid padding');
 		return substr($text, 0, -1 * $pad);
   } catch (Exception $e) {
