@@ -23,16 +23,16 @@ Encryption using Java
       SecretKeySpec secretKeySpec;
       secretKeySpec = new SecretKeySpec(key, "AES");
       
-	  // PKCS#5 Padding
+      // PKCS#5 Padding
       Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
       AlgorithmParameters algorithmParams = AlgorithmParameters.getInstance("AES");
       algorithmParams.init(new IvParameterSpec(iv));
       cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, algorithmParams);
       byte[] encryptedBytes = cipher.doFinal(plaintext);
       return DatatypeConverter.printBase64Binary(encryptedBytes);
-		} catch (NoSuchPaddingException | BadPaddingException e) {
+    } catch (NoSuchPaddingException | BadPaddingException e) {
       System.out.println("Padding exception in encrypt(): " + e);
-		} catch ( NoSuchAlgorithmException | InvalidKeyException | IllegalBlockSizeException e ) {
+    } catch ( NoSuchAlgorithmException | InvalidKeyException | IllegalBlockSizeException e ) {
       System.out.println("Encryption exception in encrypt(): " + e);
     } catch (Exception e) {
       System.out.println("Exception in encrypt(): " + e);
@@ -74,8 +74,8 @@ Encryption using Node.js. Requires [crypto-js](https://cdnjs.cloudflare.com/ajax
   ```javascript
 // Encryption using AES CBC (128-bits)
 function encrypt(plaintext, passphrase, iv) {
-  try {
-    var encrypted = CryptoJS.AES.encrypt(
+    try {
+      var encrypted = CryptoJS.AES.encrypt(
       plaintext,
       CryptoJS.enc.Utf8.parse(passphrase),
       { 
@@ -83,18 +83,17 @@ function encrypt(plaintext, passphrase, iv) {
         iv: CryptoJS.enc.Utf8.parse(iv), 
         // PKCS#7 with 8-byte block size
         padding: CryptoJS.pad.Pkcs7 
-      }
-    );
-    return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
-  } catch (error) {
-    console.log('Encryption exception in encrypt(): ' + error.message);
-  }
+      });
+      return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
+    } catch (error) {
+      console.log('Encryption exception in encrypt(): ' + error.message);
+    }
 }
 
 // Decryption using AES CBC (128-bits)
 function decrypt(ciphertext, passphrase, iv) {
-  try {
-    var decrypted = CryptoJS.AES.decrypt(
+    try {
+      var decrypted = CryptoJS.AES.decrypt(
       ciphertext,
       CryptoJS.enc.Utf8.parse(passphrase),
       { 
@@ -102,12 +101,11 @@ function decrypt(ciphertext, passphrase, iv) {
         iv: CryptoJS.enc.Utf8.parse(iv), 
         // PKCS#7 with 8-byte block size
         padding: CryptoJS.pad.Pkcs7 
-      }
-    );
-    return decrypted.toString(CryptoJS.enc.Utf8);
-  } catch (error) {
-    console.log('Encryption exception in decrypt(): ' + error.message);
-  }
+      });
+      return decrypted.toString(CryptoJS.enc.Utf8);
+    } catch (error) {
+      console.log('Encryption exception in decrypt(): ' + error.message);
+    }
 }
   ```
 
